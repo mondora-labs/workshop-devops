@@ -1,11 +1,22 @@
-# Prerequisite
+# Kubernetes 101
 
-  * a running MiniKube,
+- [Kubernetes 101](#kubernetes-101)
+  - [Prerequisite](#prerequisite)
+  - [Start minikube](#start-minikube)
+  - [Accesso kubectl](#accesso-kubectl)
+  - [Accesso UI](#accesso-ui)
+  - [Deploy Hello World](#deploy-hello-world)
+  - [Scrivere YAML deployment](#scrivere-yaml-deployment)
+
+## Prerequisite
+
+- a running MiniKube
 
 Kubernetes community provides [user manual for the installation](https://kubernetes.io/docs/setup/minikube/).
-Remember that Minikube is not production ready, you have to use only for lab env.
+Remember that Minikube is not production ready, you have to use only for lab
+env.
 
-# Start minikube
+## Start minikube
 
 Open a terminal and start minikube:
 
@@ -13,7 +24,8 @@ Open a terminal and start minikube:
 minikube start
 ```
 
-As long as you see the message ‘Kubectl is now configured to use the cluster.’ you have successfully ran Minikube:
+As long as you see the message ‘Kubectl is now configured to use the cluster.’
+you have successfully ran Minikube:
 
 ```bash
 😄  minikube v1.0.0 on darwin (amd64)
@@ -48,10 +60,11 @@ apiserver: Running
 kubectl: Correctly Configured: pointing to minikube-vm at 172.31.36.43
 ```
 
-# Accesso kubectl
+## Accesso kubectl
 
-Kubectl is a command line interface for running commands against Kubernetes clusters. 
-Authentication is made by certificate, configured under user's home directory: /home/<user>/.kube
+Kubectl is a command line interface for running commands against Kubernetes
+clusters. Authentication is made by certificate, configured under user's home
+directory: /home/<user>/.kube
 
 Open the config file:
 
@@ -96,7 +109,7 @@ NAME       STATUS   ROLES    AGE   VERSION
 minikube   Ready    master   21m   v1.14.0
 ```
 
-# Accesso UI
+## Accesso UI
 
 If you want to navigate the cluster throught the web UI, launch the command:
 
@@ -116,7 +129,7 @@ http://127.0.0.1:51433/api/v1/namespaces/kube-system/services/http:kubernetes-da
 
 Copy&Paste the UI in a web browser
 
-# Deploy Hello World
+## Deploy Hello World
 
 Let us run our first container:
 
@@ -146,7 +159,8 @@ NAME                                        DESIRED   CURRENT   READY   AGE
 replicaset.apps/hello-minikube-597c997dd4   1         1         1       114s
 ```
 
-Our hello-world app is running, now we have to expose the container ports so that we can access it from the web:
+Our hello-world app is running, now we have to expose the container ports so
+that we can access it from the web:
 
 ```bash
 kubectl expose deployment hello-minikube --type=NodePort
@@ -159,15 +173,18 @@ kubectl get services
 ```
 
 kubectl get services command shows the list of services and their exposed ports.
-The service post changes each time you expose a port, you may have been given a different value than what I have.
+The service post changes each time you expose a port, you may have been given a
+different value than what I have.
 
 ```bash
 NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 hello-minikube   NodePort    10.98.213.172   <none>        8080:32488/TCP   49s
 kubernetes       ClusterIP   10.96.0.1       <none>        443/TCP          35m
 ```
-Accessing the Application Using the Exposed NodePort, retrive the minikube cluster, virtual IP:
-Port 32488 is the TCP port where the Port 8080 of the container is exposed.
+
+Accessing the Application Using the Exposed NodePort, retrieve the minikube
+cluster, virtual IP: Port 32488 is the TCP port where the Port 8080 of the
+container is exposed.
 
 ```bash
 minikube ip
@@ -193,13 +210,13 @@ kubectl get all
 
 And delete it.
 
-# Scrivere YAML deployment
+## Scrivere YAML deployment
 
-Now it's time to deploy the SpringBoot microservice created in Lab #04
-Open a text editor and create mongodb.yml file.
+Now it's time to deploy the SpringBoot microservice created in Lab #04 Open a
+text editor and create mongodb.yml file.
 
-We're using this file to deploy a **non** production ready mongodb inside minikube.
-Add the declaration object to create a persistent storage:
+We're using this file to deploy a **non** production ready mongodb inside
+minikube. Add the declaration object to create a persistent storage:
 
 ```bash
 ---
@@ -217,9 +234,9 @@ spec:
       storage: 1Gi
 ```
 
-This block contain the max capacity of the persistent volume and a declarativ name, used to identify the object.
-Create a Deployment object in order to define our mongo service:
-
+This block contain the max capacity of the persistent volume and a declarative
+name, used to identify the object. Create a Deployment object in order to define
+our mongo service:
 
 ```bash
 ---
@@ -251,8 +268,11 @@ spec:
           claimName: mongodb-storage-claim
 ```
 
-We using the Docker Hub official mongo images and we mount the persisten storage under /data/db [as documented](https://hub.docker.com/_/mongo).
-Last, add the Service. A service tells the rest of the Kubernetes environment (including other pods) what services your application provides. And other applications can find your service through **Kurbenetes service discovery**.
+We using the Docker Hub official mongo images and we mount the persistent storage
+under /data/db [as documented](https://hub.docker.com/_/mongo). Last, add the
+Service. A service tells the rest of the Kubernetes environment (including other
+pods) what services your application provides. And other applications can find
+your service through **Kurbenetes service discovery**.
 
 ```bash
 ---
@@ -333,8 +353,9 @@ spec:
 ---
 ```
 
-The MONGO_URI environment variable contain the connection string to the mongo, previously deployed, throught the K8s service discovery.
-Note: MONGO_URI hostname will be valorized using the name of Service used in mongodb.yml.
+The MONGO_URI environment variable contain the connection string to the mongo,
+previously deployed, throught the K8s service discovery. Note: MONGO_URI
+hostname will be valorized using the name of Service used in mongodb.yml.
 
 And use kubectl to apply the configuration. And
 
@@ -342,9 +363,9 @@ And use kubectl to apply the configuration. And
 kubectl get services
 ```
 
-To retrive the TCP port.
+To retrieve the TCP port.
 
-Test the microservice healt:
+Test the microservice health:
 
 ```bash
 curl 192.168.99.101:30357/actuator/health

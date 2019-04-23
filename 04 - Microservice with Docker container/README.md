@@ -1,29 +1,26 @@
 # Microservice ❤️ Docker
 
-## Table of Contents
-
 - [Microservice ❤️ Docker](#microservice-%E2%9D%A4%EF%B8%8F-docker)
-  - [Table of Contents](#table-of-contents)
-    - [Prerequisites](#prerequisites)
-    - [Spring-boot](#spring-boot)
-      - [Init](#init)
-      - [Model](#model)
-      - [Repository](#repository)
-      - [Controller and Service](#controller-and-service)
-      - [Configuring Swagger](#configuring-swagger)
-      - [Monitoring](#monitoring)
-    - [Dockerization](#dockerization)
-      - [Sample](#sample)
-      - [Multistage](#multistage)
+  - [Prerequisites](#prerequisites)
+  - [Microservice with Spring-boot](#microservice-with-spring-boot)
+    - [Init](#init)
+    - [Model](#model)
+    - [Repository](#repository)
+    - [Controller and Service](#controller-and-service)
+    - [Configuring Swagger](#configuring-swagger)
+    - [Monitoring](#monitoring)
+  - [Dockerization](#dockerization)
+    - [Sample](#sample)
+    - [Multistage](#multistage)
 
-### Prerequisites
+## Prerequisites
 
 - Java SDK 1.8+
 - Maven or gradle build tool
 
 To efficiently manage Java and build tools versions you can use [SDKMAN!](https://sdkman.io/).
 
-### Spring-boot
+## Microservice with Spring-boot
 
 **Scope:** deliver an read API for exposing data from [DocumentDB](https://aws.amazon.com/documentdb/).
 
@@ -44,7 +41,7 @@ to provide, for our **MVP**, at least:
   - Unit tests
   - ...
 
-#### Init
+### Init
 
 Starting a Spring boot project is pretty easy, you have to options:
 
@@ -53,12 +50,12 @@ Starting a Spring boot project is pretty easy, you have to options:
 
 Make sure to select at least one dependencies for implementing Rest repositories.
 
-#### Model
+### Model
 
 Our domain model: what we need to work with. For the sake of simplicity our
 model will be straightforward and will not need any [DTO](https://en.wikipedia.org/wiki/Data_transfer_object).
 
-#### Repository
+### Repository
 
 Is the _meta_ interface for accessing out Mongo Database.
 
@@ -77,7 +74,7 @@ Repositories are convention driven
 [see here](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-creation)
 for a detailed explanation.
 
-#### Controller and Service
+### Controller and Service
 
 In a layered architecture the controller is responsible to transmit/receive data
 from the transport channel (ex. HTTP/S or WebSockets). The service contains all
@@ -114,7 +111,7 @@ Exercises:
 - try implementing a **GET** endpoint to search by authors.
 - try implementing a **POST** endpoint to _save_ one `Model.java`.
 
-#### Configuring Swagger
+### Configuring Swagger
 
 Swagger is a common lib for documenting our endpoints.
 
@@ -164,7 +161,7 @@ Exercise:
 - try exposing only the controllers you implemented (ex. those with
   `@RestController` annotation).
 
-#### Monitoring
+### Monitoring
 
 > Spring Boot Actuator module provides production-ready features like health
 > checks, metrics, auditing etc. All of these features can be consumed over HTTP
@@ -194,9 +191,9 @@ management:
       show-details: always
 ```
 
-### Dockerization
+## Dockerization
 
-#### Sample
+### Sample
 
 ```Docker
 FROM image
@@ -215,7 +212,7 @@ Exercise:
 
 - Fill the gaps.
 
-#### Multistage
+### Multistage
 
 We can separate dependency resolution and source code compilation to optimize
 Docker build time, exploiting layer re-utilization.

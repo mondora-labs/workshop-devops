@@ -1,17 +1,14 @@
 # Reducing Java services footprint
 
-## Table of Contents
-
 - [Reducing Java services footprint](#reducing-java-services-footprint)
-  - [Table of Contents](#table-of-contents)
-    - [Prerequisites](#prerequisites)
-    - [Problem](#problem)
-    - [GraalVM and native-image](#graalvm-and-native-image)
-    - [Sample project](#sample-project)
-      - [Benchmarks](#benchmarks)
-      - [Conclusion](#conclusion)
+  - [Prerequisites](#prerequisites)
+  - [Problem](#problem)
+  - [GraalVM and native-image](#graalvm-and-native-image)
+  - [Sample project](#sample-project)
+    - [Benchmarks](#benchmarks)
+    - [Conclusion](#conclusion)
 
-### Prerequisites
+## Prerequisites
 
 - Java SDK 1.8+
 - Maven build tool
@@ -27,7 +24,7 @@ point to the corresponding installation folders, for example:
 
 To efficiently manage Java and build tools versions you can use [SDKMAN!](https://sdkman.io/).
 
-### Problem
+## Problem
 
 You already exposed your first Java service and optimized disk size utilization
 with a multistage Docker build, but at runtime the JVM is eating many megabytes
@@ -53,7 +50,7 @@ So:
 (JVM overhead + service memory consumption) * _n_ of μ-services = tons of RAM (!!!)
 ```
 
-### GraalVM and native-image
+## GraalVM and native-image
 
 There are many frameworks and solution to tackle this kind of problem, all are
 building on top the GraalVM.
@@ -92,7 +89,7 @@ In fact to enable the AOT compilation you only need to enable the provided
 mvn package -Pnative
 ```
 
-### Sample project
+## Sample project
 
 The project offer a basic implementation of the 4 arithmetic operations (sum,
 subtraction, multiplication and division) for pre-1970 UK prices.
@@ -156,7 +153,7 @@ A sample `Dockerfile` is provided to have our binary exposed:
 
 > For sake of simplicity we'll use ubuntu as a base image for building
 
-#### Benchmarks
+### Benchmarks
 
 ```bash
 ➜ docker images
@@ -184,7 +181,7 @@ quarkus-multistage-native        latest        7b4cd1bff13e        91.4MB
 | quarkus-multistage        | 485MB           | 44.47MiB               | 1.095s       |
 | quarkus-multistage-native | 91.4MB          | 1.762MiB               | 0.003s       |
 
-#### Conclusion
+### Conclusion
 
 By using Quarkus you are already beneficing from a lightweight application runtime.
 

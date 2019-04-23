@@ -1,26 +1,24 @@
 # Git basic commands
 
-## Table of Contents
-
 - [Git basic commands](#git-basic-commands)
-  - [Table of Contents](#table-of-contents)
-    - [.gitignore](#gitignore)
-    - [Pull Request](#pull-request)
-    - [GitHub flow](#github-flow)
-    - [Cheats](#cheats)
-    - [CONTRIBUTING.md](#contributingmd)
-      - [Developer workflow](#developer-workflow)
-      - [Reviewer workflow](#reviewer-workflow)
-      - [Naming convention](#naming-convention)
-      - [Commit Message Format](#commit-message-format)
+  - [.gitignore](#gitignore)
+  - [Pull Request](#pull-request)
+  - [GitHub flow](#github-flow)
+  - [Cheats](#cheats)
+  - [CONTRIBUTING.md](#contributingmd)
+    - [Developer workflow](#developer-workflow)
+    - [Reviewer workflow](#reviewer-workflow)
+    - [Naming convention](#naming-convention)
+    - [Commit Message Format](#commit-message-format)
 
-### .gitignore
+## .gitignore
 
-Don't commit everything. Only sources files or assets needed to build the artifact.
+Don't commit everything. Only sources files or assets needed to build the
+artifact.
 
 Story telling on ours #failure-parties.
 
-### Pull Request
+## Pull Request
 
 Workshops participants:
 
@@ -30,7 +28,7 @@ Workshops participants:
 
 Exercise: make your personal pull request and fill this table.
 
-### GitHub flow
+## GitHub flow
 
 - Fork
 - Develop
@@ -38,7 +36,7 @@ Exercise: make your personal pull request and fill this table.
 - Push
 - Merge
 
-### Cheats
+## Cheats
 
 To update your local fork with the original upstream.
 
@@ -48,11 +46,12 @@ git fetch upstream
 git merge upstream/master
 ```
 
-### CONTRIBUTING.md
+## CONTRIBUTING.md
 
-Many flavours of workflows exist, make it yours. One example (from a `React/js` codebase).
+Many flavours of workflows exist, make it yours. One example (from a `React/js`
+codebase).
 
-#### Developer workflow
+### Developer workflow
 
 - checkout and pull the `master` branch
 - make a feature branch for the feature you wish to develop (if possible, the
@@ -63,15 +62,16 @@ Many flavours of workflows exist, make it yours. One example (from a `React/js` 
 - make a pull request to `master`
 - ask a reviewer to review and merge the pull request
 
-#### Reviewer workflow
+### Reviewer workflow
 
-- the feature works as expected (according the user story, or to other requirements)
+- the feature works as expected (according the user story, or to other
+  requirements)
 - the code is decent
 - there are unit tests for the feature
 - all test pass
 - linting passes
 
-#### Naming convention
+### Naming convention
 
 To avoid any problems with case sensitive/insensitive file system `kebab-case`
 convention is used.
@@ -88,9 +88,10 @@ components
 └── super-utils.js
 ```
 
-`kebab-case` has also the side effect to be homogeneous with npm dependencies imports.
+`kebab-case` has also the side effect to be homogeneous with npm dependencies
+imports.
 
-#### Commit Message Format
+### Commit Message Format
 
 Use conventional commits format.
 
