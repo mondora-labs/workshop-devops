@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/test}
+info:
+  app:
+    name: Workshop 04
+    description: Microservice with Docker container
+    java:
+      version: ${java.version}
+management:
+  endpoint:
+    health:
+      show-details: always
